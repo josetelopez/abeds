@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `abeds` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `abeds`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: abeds
@@ -39,7 +37,11 @@ CREATE TABLE `abedsd_usuario` (
   `telefono2` varchar(12) DEFAULT NULL,
   `email` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `id_usuario_UNIQUE` (`id_usuario`)
+  UNIQUE KEY `id_usuario_UNIQUE` (`id_usuario`),
+  KEY `id_tipo_usuario_idx` (`id_tipo_usuario`),
+  KEY `id_direccion_idx` (`id_direccion`),
+  CONSTRAINT `id_direccion` FOREIGN KEY (`id_direccion`) REFERENCES `abedsd_direccion` (`id_dirección`),
+  CONSTRAINT `id_tipo_usuario` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `abedsp_tp_usuario` (`id_tp_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -49,6 +51,7 @@ CREATE TABLE `abedsd_usuario` (
 
 LOCK TABLES `abedsd_usuario` WRITE;
 /*!40000 ALTER TABLE `abedsd_usuario` DISABLE KEYS */;
+INSERT INTO `abedsd_usuario` VALUES (1,1,'josete','josete','Jose Manuel','Lopez ','Gonzalez','47003115Q',1,'S','627993624','654322123','gepettometal@hotmail.com');
 /*!40000 ALTER TABLE `abedsd_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-20  7:15:27
+-- Dump completed on 2021-05-20 11:02:04
