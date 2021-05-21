@@ -1,13 +1,13 @@
-package com.peretecorporate;
-
+package com.peretecorporate.abedsbackend;
+//
 //import org.junit.jupiter.api.Test;
 //import org.springframework.boot.test.context.SpringBootTest;
-
+//
 //@SpringBootTest
-//class AbedsBackendApplicationTests {
+//class AbedsbackendApplicationTests {
 //
 //	@Test
 //	void contextLoads() {
 //	}
-
+//
 //}
