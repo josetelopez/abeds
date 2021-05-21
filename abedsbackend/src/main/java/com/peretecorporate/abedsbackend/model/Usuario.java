@@ -2,51 +2,57 @@ package com.peretecorporate.abedsbackend.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "escu_d_usuario")
+@Table(name = "abedsd_usuario")
 public class Usuario {
 
 	@Id
-	@Column(name = "id_usuario")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "id_usuario", unique = true, nullable = false)
 	private Integer idUsuario;
 
 	@Column(name = "id_tipo_usuario")
 	private Integer idTipoUsuario;
 
-	@Column(name = "nombreUsuario")
+	@Column(name = "nombreUsuario", length = 150, nullable = false)
 	private String nombreUsuario;
 
-	@Column(name = "contrasenna")
+	@Column(name = "contrasenna", nullable = false)
 	private String contrasenna;
 
-	@Column(name = "nombre")
+	@Column(name = "nombre", nullable = false, length = 50)
 	private String nombre;
 
-	@Column(name = "apellido1")
+	@Column(name = "apellido1", nullable = false, length = 50)
 	private String apellido1;
 
-	@Column(name = "apellido2")
+	@Column(name = "apellido2", nullable = false, length = 50)
 	private String apellido2;
 
-	@Column(name = "nif")
+	@Column(name = "nif", length = 9)
 	private String nif;
 
-	@Column(name = "id_direccion")
-	private Integer idDireccion;
+	@ManyToOne
+	@JoinColumn(name = "id_direccion")
+	private Direccion idDireccion;
 
-	@Column(name = "activo")
+	@Column(name = "activo", nullable = false, length = 1)
 	private String activo;
 
-	@Column(name = "telefono1")
+	@Column(name = "telefono1", nullable = false, length = 12)
 	private String telefono1;
 
-	@Column(name = "telefono2")
+	@Column(name = "telefono2", length = 12)
 	private String telefono2;
 
-	@Column(name = "email")
+	@Column(name = "email", length = 250)
 	private String email;
 
 	/**
@@ -118,12 +124,12 @@ public class Usuario {
 		this.nif = nif;
 	}
 
-	public Integer getIdDireccion() {
-		return idDireccion;
+	public void setIdDireccion(Direccion idDireccion) {
+		this.idDireccion = idDireccion;
 	}
 
-	public void setIdDireccion(Integer idDireccion) {
-		this.idDireccion = idDireccion;
+	public Direccion getIdDireccion() {
+		return idDireccion;
 	}
 
 	public String getActivo() {
