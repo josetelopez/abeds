@@ -16,7 +16,7 @@ public class SwaggerConfiguration {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.peretecorporate.abedsbackend.controller"))
-				.paths(PathSelectors.regex("/escuidi/.*")).build();
+				.paths(PathSelectors.regex("/v1/.*")).build();
 	}
 
 }

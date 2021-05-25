@@ -16,44 +16,45 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id_usuario", unique = true, nullable = false)
-	private Integer idUsuario;
+	private Integer		idUsuario;
 
-	@Column(name = "id_tipo_usuario")
-	private Integer idTipoUsuario;
+	@ManyToOne
+	@JoinColumn(name = "id_tp_usuario")
+	private TipoUsuario	idTipoUsuario;
 
-	@Column(name = "nombreUsuario", length = 150, nullable = false)
-	private String nombreUsuario;
+	@Column(name = "nombre_usuario", length = 150, nullable = false)
+	private String		nombreUsuario;
 
 	@Column(name = "contrasenna", nullable = false)
-	private String contrasenna;
+	private String		contrasenna;
 
 	@Column(name = "nombre", nullable = false, length = 50)
-	private String nombre;
+	private String		nombre;
 
 	@Column(name = "apellido1", nullable = false, length = 50)
-	private String apellido1;
+	private String		apellido1;
 
 	@Column(name = "apellido2", nullable = false, length = 50)
-	private String apellido2;
+	private String		apellido2;
 
 	@Column(name = "nif", length = 9)
-	private String nif;
+	private String		nif;
 
 	@ManyToOne
 	@JoinColumn(name = "id_direccion")
-	private Direccion idDireccion;
+	private Direccion	idDireccion;
 
 	@Column(name = "activo", nullable = false, length = 1)
-	private String activo;
+	private String		activo;
 
 	@Column(name = "telefono1", nullable = false, length = 12)
-	private String telefono1;
+	private String		telefono1;
 
 	@Column(name = "telefono2", length = 12)
-	private String telefono2;
+	private String		telefono2;
 
 	@Column(name = "email", length = 250)
-	private String email;
+	private String		email;
 
 	/**
 	 * Getter y setter
@@ -68,11 +69,11 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
-	public Integer getIdTipoUsuario() {
+	public TipoUsuario getIdTipoUsuario() {
 		return idTipoUsuario;
 	}
 
-	public void setIdTipoUsuario(Integer idTipoUsuario) {
+	public void setIdTipoUsuario(TipoUsuario idTipoUsuario) {
 		this.idTipoUsuario = idTipoUsuario;
 	}
 
