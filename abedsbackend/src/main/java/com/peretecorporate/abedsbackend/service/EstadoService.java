@@ -1,13 +1,23 @@
 package com.peretecorporate.abedsbackend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.peretecorporate.abedsbackend.repository.IEstadoRepository;
+import com.peretecorporate.abedsbackend.model.Estado;
 
 @Service
-public class EstadoService {
+public interface EstadoService {
 
-	@Autowired
-	private IEstadoRepository estadoRepository;
+	List<Estado> findAll();
+
+	Estado getEstadoBycodEstado(int codEstado);
+
+	Estado getEstadoBynombreEstado(String nombreEstado);
+
+	List<String> getnombreEstados();
+
+	void delete(Estado estado);
+	
+	void save(Estado estado);
 }
