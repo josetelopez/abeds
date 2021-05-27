@@ -1,24 +1,38 @@
 package com.peretecorporate.abedsbackend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.peretecorporate.abedsbackend.model.Usuario;
-import com.peretecorporate.abedsbackend.repository.IUsuarioRepository;
 
 @Service
-public class UsuarioService {
+public interface UsuarioService {
 
-	@Autowired
-	private IUsuarioRepository usuarioRepository;
+	List<Usuario> findAll();
 
-	/**
-	 * Metodoo para registrar un usuario
-	 * 
-	 * @param usuario
-	 */
-	public void registrar(Usuario usuario) {
-		usuarioRepository.save(usuario);
+	Usuario findUsuarioByidUsuario(Integer id);
 
-	}
+	Usuario findUsuarioByNombre(String nombre, String apellido1, String apellido2);
+
+	Usuario findUsuarioBynif(String nif);
+
+	Usuario findUsuarioByemail(String email);
+
+	List<Usuario> getListadoUsuariosAdministradores();
+
+	List<Usuario> getListadoUsuarioEntrenadores();
+
+	List<Usuario> getListadoUsuarioRespSede();
+	
+	List<Usuario> getListadoUsuarioArbitros();
+
+	void deleteById(Integer id);
+
+	void deleteByNif(String nif);
+
+	void delete(Usuario usuario);
+
+	void save(Usuario usuario);
+
 }
