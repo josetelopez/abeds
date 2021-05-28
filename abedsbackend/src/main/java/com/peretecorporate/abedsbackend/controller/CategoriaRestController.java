@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.peretecorporate.abedsbackend.model.Categoria;
-import com.peretecorporate.abedsbackend.service.ICategoriaService;
+import com.peretecorporate.abedsbackend.service.CategoriaService;
 
 @RestController
 @RequestMapping("/v1/categoria")
@@ -20,7 +20,7 @@ public class CategoriaRestController {
 	private static final Logger	log	= LoggerFactory.getLogger(CategoriaRestController.class);
 
 	@Autowired
-	ICategoriaService			categoriaService;
+	CategoriaService			categoriaService;
 
 	@RequestMapping(value = "/allCategorias", method = RequestMethod.GET)
 	List<Categoria> getAllCategorias() {

@@ -1,13 +1,34 @@
 package com.peretecorporate.abedsbackend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.peretecorporate.abedsbackend.repository.IEquipoRepository;
+import com.peretecorporate.abedsbackend.model.Equipo;
 
 @Service
-public class EquipoService {
+public interface EquipoService {
 
-	@Autowired
-	private IEquipoRepository equipoRepository;
+	List<Equipo> findAll();
+
+	List<Equipo> findAllByidCategoria(Integer idCategoria);
+	
+	List<Equipo> findAllByidEntrenador(Integer idEntrenador);
+	
+	List<Equipo> findAllBynombreEquipo();
+	
+	List<Equipo> findAllByanno();
+	
+	Equipo getByidEquipo(Integer idEquipo);
+	
+	Equipo getBynombreEquipo(String nombreEquipo);
+	
+	List<String> findAllNombreEquipo();
+	
+	void save(Equipo equipo);
+	
+	void delete(Equipo equipo);
+	
+	void deleteByidEquipo(Integer idEquipo);
+	
 }

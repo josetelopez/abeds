@@ -9,7 +9,7 @@ import com.peretecorporate.abedsbackend.model.Categoria;
 import com.peretecorporate.abedsbackend.repository.ICategoriaRepository;
 
 @Service
-public class CategoriaServiceImpl implements ICategoriaService {
+public class CategoriaServiceImpl implements CategoriaService {
 
 	@Autowired
 	private ICategoriaRepository categoriaRepository;
