@@ -11,7 +11,7 @@ public interface JugadorService {
 
 	List<Jugador> findAll();
 
-	List<Jugador> findAllByidEquipo(Integer idEquipo);
+	List<Jugador> findAllByequipo(Integer idEquipo);
 
 	List<Jugador> findAllByidCategoria(Integer idCategoria);
 

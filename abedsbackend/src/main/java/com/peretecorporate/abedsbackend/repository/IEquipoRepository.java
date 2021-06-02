@@ -3,6 +3,7 @@ package com.peretecorporate.abedsbackend.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.peretecorporate.abedsbackend.model.Equipo;
 
@@ -11,18 +12,19 @@ public interface IEquipoRepository extends JpaRepository<Equipo, Integer>{
 	
 	List<Equipo> findAll();
 
-	List<Equipo> findAllByidCategoria(Integer idCategoria);
+	List<Equipo> findAllBycategoria(Integer idCategoria);
 	
-	List<Equipo> findAllByidEntrenador(Integer idEntrenador);
+	List<Equipo> findAllByentrenador(Integer idEntrenador);
 	
-	List<Equipo> findAllBynombreEquipo();
+	@Query("Select equi from Equipo equi where equi.nombreEquipo = :nombreEquipo")
+	List<Equipo> findAllBynombreEquipo(String nombreEquipo);
 	
-	List<Equipo> findAllByanno();
+	List<Equipo> findAllByanno(int anno);
 	
 	Equipo getByidEquipo(Integer idEquipo);
 	
 	Equipo getBynombreEquipo(String nombreEquipo);
 	
-	List<String> findAllNombreEquipo();
+	//List<String> findAllombreEquipo();
 		
 }

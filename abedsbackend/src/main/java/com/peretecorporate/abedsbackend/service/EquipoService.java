@@ -15,10 +15,10 @@ public interface EquipoService {
 	
 	List<Equipo> findAllByidEntrenador(Integer idEntrenador);
 	
-	List<Equipo> findAllBynombreEquipo();
+	List<Equipo> findAllBynombreEquipo(String nombreEquipo);
 	
-	List<Equipo> findAllByanno();
-	
+	List<Equipo> findAllByanno(int anno);
+
 	Equipo getByidEquipo(Integer idEquipo);
 	
 	Equipo getBynombreEquipo(String nombreEquipo);

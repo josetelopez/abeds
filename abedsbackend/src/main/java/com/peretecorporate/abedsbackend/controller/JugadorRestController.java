@@ -37,7 +37,7 @@ public class JugadorRestController {
 	public List<Jugador> findAllByidEquipo(@PathVariable("idEquipo") Integer idEquipo) {
 
 		log.info("Inicio del metodo rest JugadorRestController>>findAllByidEquipo.... con parametro " + idEquipo);
-		List<Jugador> jugadorListEquipo = jugadorService.findAllByidEquipo(idEquipo);
+		List<Jugador> jugadorListEquipo = jugadorService.findAllByequipo(idEquipo);
 		log.info("Finaliza del metodo rest JugadorRestController>>findAllByidEquipo...");
 
 		return jugadorListEquipo;

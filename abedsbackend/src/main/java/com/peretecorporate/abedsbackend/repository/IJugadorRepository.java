@@ -11,11 +11,11 @@ public interface IJugadorRepository extends JpaRepository<Jugador, Integer> {
 	
 	List<Jugador> findAll();
 	
-	List<Jugador> findAllByidEquipo(Integer idEquipo);
+	List<Jugador> findAllByequipo(Integer idEquipo);
 	
-	List<Jugador> findAllByidCategoria(Integer idCategoria);
+	List<Jugador> findAllBycategoria(Integer idCategoria);
 	
-	List<Jugador> findAllByidEstado(Integer idEstado);
+	List<Jugador> findAllByestado(Integer idEstado);
 	
 	Jugador getJugadorByidJugador(Integer id);
 	

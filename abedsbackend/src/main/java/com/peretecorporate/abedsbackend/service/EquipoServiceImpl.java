@@ -16,13 +16,11 @@ public class EquipoServiceImpl implements EquipoService{
 
 	@Override
 	public List<Equipo> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return equipoRepository.findAll();
 	}
 
 	@Override
 	public List<Equipo> findAllByidCategoria(Integer idCategoria) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -33,13 +31,13 @@ public class EquipoServiceImpl implements EquipoService{
 	}
 
 	@Override
-	public List<Equipo> findAllBynombreEquipo() {
+	public List<Equipo> findAllBynombreEquipo(String nombreEquipo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Equipo> findAllByanno() {
+	public List<Equipo> findAllByanno(int anno) {
 		// TODO Auto-generated method stub
 		return null;
 	}

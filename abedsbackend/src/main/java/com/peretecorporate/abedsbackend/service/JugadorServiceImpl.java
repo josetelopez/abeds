@@ -20,18 +20,18 @@ public class JugadorServiceImpl implements JugadorService{
 	}
 
 	@Override
-	public List<Jugador> findAllByidEquipo(Integer idEquipo) {		
-		return jugadorRepository.findAllByidEquipo(idEquipo);
+	public List<Jugador> findAllByequipo(Integer idEquipo) {		
+		return jugadorRepository.findAllByequipo(idEquipo);
 	}
 
 	@Override
 	public List<Jugador> findAllByidCategoria(Integer idCategoria) {
-		return jugadorRepository.findAllByidCategoria(idCategoria);
+		return jugadorRepository.findAllBycategoria(idCategoria);
 	}
 
 	@Override
 	public List<Jugador> findAllByidEstado(Integer idEstado) {	
-		return jugadorRepository.findAllByidEstado(idEstado);
+		return jugadorRepository.findAllByestado(idEstado);
 	}
 
 	@Override
