@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.peretecorporate.abedsbackend.model.Usuario;
 
+@Transactional
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	List<Usuario> findAll();
