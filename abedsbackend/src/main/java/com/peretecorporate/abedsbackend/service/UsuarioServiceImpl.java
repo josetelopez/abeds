@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import com.peretecorporate.abedsbackend.exception.AbedsBackendException;
 import com.peretecorporate.abedsbackend.model.Usuario;
@@ -272,25 +273,55 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public void save(Usuario usuario) throws AbedsBackendException {
-		//TODO crear un metodo de validaciones de los campos.
+
 		try {
 
 			if (usuario != null && usuario.getIdUsuario() != null) {
 				//update
+				validateUsuario(usuario);
 				usuarioRepository.save(usuario);
 			}
 			else if (usuario.getIdUsuario() != null) {
 				//create
+				validateUsuario(usuario);
+				this.usuarioRepository.save(usuario);
 			}
-			else {
-				//error
-			}
-
 		}
 		catch (Exception e) {
-			log.error("Error en el metodo delete de save " + e);
+			log.error("Error en el metodo save de UsuarioService " + e);
 			throw new AbedsBackendException(this.errorComunicaciones);
 		}
+
+	}
+
+	/**
+	 * Metodo para validar los campos del objeto usuario
+	 * @param usuario
+	 */
+	//TODO formato de la contrasenna[], formato del nif[],
+	private void validateUsuario(Usuario usuario) {
+		Assert.notNull(usuario.getNombreUsuario(),
+					"No se esta introduciendo nombre(alias) del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getContrasenna(),
+					"No se esta introduciendo contrasenna del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getNombre(), "No se esta introduciendo nombre del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getApellido1(),
+					"No se esta introduciendo apellido1 del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getApellido2(),
+					"No se esta introduciendo apellido2 del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getIdDireccion(),
+					"No se esta introduciendo la direccion del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getActivo(),
+					"No se esta introduciendo valor al campo activo del usuario" + usuario.getIdUsuario());
+		Assert.notNull(usuario.getTelefono1(),
+					"No se esta introduciendo telefono1 del usuario" + usuario.getIdUsuario());
+
+		Assert.isTrue(usuario.getNif().length() == 9, "El dni del usuario no tiene una longitud de 9 caracteres");
+
+		Assert.isTrue(usuario.getTelefono1().length() == 9,
+					"El telefono1 del usuario no tiene una longitud de 9 caracteres");
+		Assert.isTrue(usuario.getTelefono2().length() == 9,
+					"El telefono2 del usuario no tiene una longitud de 9 caracteres");
 
 	}
 

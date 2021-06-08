@@ -32,7 +32,6 @@ public class UsuarioRestController {
 	/** Servicio usuario */
 	@Autowired
 	private UsuarioService		usuarioService;
-	
 
 	@RequestMapping(value = "/allUsuario", method = RequestMethod.GET)
 	@ApiOperation(value = "Obtener listado usuarios", notes = "Este metodo obtiene un listado de todos los usuarios")
@@ -64,7 +63,8 @@ public class UsuarioRestController {
 			@ApiResponse(code = 403, message = "Acceso prohibido"),
 			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public ResponseEntity<Usuario> findUsuarioByid(
-				@ApiParam(value = "id de usuario del usuario que vamos a buscar", required = true) @PathVariable("id") Integer id) throws AbedsBackendException {
+				@ApiParam(value = "id de usuario del usuario que vamos a buscar", required = true) @PathVariable("id") Integer id)
+				throws AbedsBackendException {
 		log.info("REST Solicitud GET de /usuario/findUsuarioByid/{id} para obtener usuario por id " + id);
 
 		Usuario usuario = usuarioService.findUsuarioByidUsuario(id);
@@ -88,7 +88,8 @@ public class UsuarioRestController {
 	public ResponseEntity<Usuario> findUsuarioByNombre(
 				@ApiParam(value = "nombre del usuario que vamos a buscar", required = true) @PathVariable("nombre") String nombre,
 				@ApiParam(value = "apellido1 de usuario del usuario que vamos a buscar", required = true) @PathVariable("apellido1") String apellido1,
-				@ApiParam(value = "apellido2 de usuario del usuario que vamos a buscar", required = true) @PathVariable("apellido2") String apellido2) throws AbedsBackendException {
+				@ApiParam(value = "apellido2 de usuario del usuario que vamos a buscar", required = true) @PathVariable("apellido2") String apellido2)
+				throws AbedsBackendException {
 
 		log.info("REST Solicitud GET de /usuario/findUsuarioByNombre/{nombre}/{apellido1}/{apellido2} para obtener usuario por nombre,apellido1,apellido2 "
 					+ nombre + " " + apellido1 + " " + apellido2 + " " + HttpStatus.NO_CONTENT);
@@ -113,7 +114,8 @@ public class UsuarioRestController {
 			@ApiResponse(code = 403, message = "Acceso prohibido"),
 			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public ResponseEntity<Usuario> findUsuarioBynif(
-				@ApiParam(value = "nif del usuario que vamos a buscar", required = true) @PathVariable("nif") String nif) throws AbedsBackendException {
+				@ApiParam(value = "nif del usuario que vamos a buscar", required = true) @PathVariable("nif") String nif)
+				throws AbedsBackendException {
 
 		log.info("REST Solicitud GET de /usuario/findUsuarioBynif/{nif} para obtener un usuario por nif " + nif);
 
@@ -136,7 +138,8 @@ public class UsuarioRestController {
 			@ApiResponse(code = 403, message = "Acceso prohibido"),
 			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public ResponseEntity<Usuario> findUsuarioByemail(
-				@ApiParam(value = "email del usuario que vamos a buscar", required = true) @PathVariable("email") String email) throws AbedsBackendException {
+				@ApiParam(value = "email del usuario que vamos a buscar", required = true) @PathVariable("email") String email)
+				throws AbedsBackendException {
 
 		log.info("REST Solicitud GET de /usuario/findUsuarioByemail/{email} para obtener un usuario por email "
 					+ email);
@@ -214,53 +217,64 @@ public class UsuarioRestController {
 		List<Usuario> userRespSede = usuarioService.getListadoUsuarioRespSede();
 		if (userRespSede != null && !userRespSede.isEmpty()) {
 			log.info("REST Respuesta GET de /usuario/allRespSede para obtener un listado de todos los usuarios responsable sede "
-						+ HttpStatus.NO_CONTENT);
+						+ HttpStatus.OK);
 			return new ResponseEntity<List<Usuario>>(userRespSede, HttpStatus.OK);
 		}
 
 		log.info("REST Respuesta GET de /usuario/allRespSede para obtener un listado de todos los usuarios responsble sede "
 					+ HttpStatus.NO_CONTENT);
 
-		return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);	
+		return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
 	}
 
-	//TODO
 	@RequestMapping(value = "/allArbitros", method = RequestMethod.GET)
-	public List<Usuario> getListadoUsuarioArbitros() throws AbedsBackendException {
-		log.info("Inicio del metodo rest UsuarioRestController>>getListadoUsuarioArbitros....");
+	@ApiOperation(value = "Obtener listado de usuarios por tipo de usuario arbitros", notes = "Este metodo obtiene un listado de todos los usuarios arbitros")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
+	public ResponseEntity<List<Usuario>> getListadoUsuarioArbitros() throws AbedsBackendException {
+
+		log.info("REST Solicitud GET de /usuario/allArbitros para obtener un listado de todos los usuarios arbitros");
+
 		List<Usuario> userArbitros = usuarioService.getListadoUsuarioArbitros();
-		log.info("Finaliza del metodo rest UsuarioRestController>>getListadoUsuarioArbitros...");
-		return userArbitros;
+		if (userArbitros != null && !userArbitros.isEmpty()) {
+			log.info("REST Respuesta GET de /usuario/allArbitros para obtener un listado de todos los usuarios arbitros "
+						+ HttpStatus.OK);
+			return new ResponseEntity<List<Usuario>>(userArbitros, HttpStatus.OK);
+		}
+
+		log.info("REST Respuesta GET de /usuario/allArbitros para obtener un listado de todos los usuarios arbitros "
+					+ HttpStatus.NO_CONTENT);
+
+		return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("id") Integer id) throws AbedsBackendException {
-		log.info("Inicio del metodo rest UsuarioRestController>>delete....");
+		log.info("Traza del metodo rest UsuarioRestController.delete(" + id + ")");
 		usuarioService.deleteById(id);
-		log.info("Finaliza del metodo rest UsuarioRestController>>delete...");
+
 	}
 
-	@RequestMapping(value = "/deleteByNif/{nif}", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteByNif/{nif}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("nif") String nif) throws AbedsBackendException {
-		log.info("Inicio del metodo rest UsuarioRestController>>delete....");
+		log.info("Inicio del metodo rest UsuarioRestController.delete(" + nif + ")");
 		usuarioService.deleteByNif(nif);
-		log.info("Finaliza del metodo rest UsuarioRestController>>delete...");
 
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public void delete(Usuario usuario) throws AbedsBackendException {
-		log.info("Inicio del metodo rest UsuarioRestController>>delete....");
+		log.info("Inicio del metodo rest UsuarioRestController.delete(" + usuario + ")");
 		usuarioService.delete(usuario);
-		log.info("Finaliza del metodo rest UsuarioRestController>>delete...");
 
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public void save(Usuario usuario) throws AbedsBackendException {
-		log.info("Inicio del metodo rest UsuarioRestController>>save....");
+		log.info("Inicio del metodo rest UsuarioRestController.save(" + usuario + ")");
 		usuarioService.save(usuario);
-		log.info("Finaliza del metodo rest UsuarioRestController>>save...");
 
 	}
 }
