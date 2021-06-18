@@ -38,6 +38,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 
+	public UsuarioServiceImpl() {
+
+	}
+
 	@Override
 	public List<Usuario> findAll() throws AbedsBackendException {
 		try {
@@ -325,4 +329,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	}
 
+	
+	public IUsuarioRepository getUsuarioRepository() {
+		return usuarioRepository;
+	}
+
+	public void setUsuarioRepository(IUsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
+	}
 }

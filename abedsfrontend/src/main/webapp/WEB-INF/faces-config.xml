@@ -14,31 +14,12 @@
     <factory>
         <exception-handler-factory>
             org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
-        </exception-handler-factory>
-
-       <!--  <exception-handler-factory>
-            com.shenbian.admin.util.pf.ExceptionHandlerFactory
-        </exception-handler-factory> -->
+        </exception-handler-factory>       
     </factory>
 
-	<navigation-rule>
-        <from-view-id>/*</from-view-id>
-        <navigation-case>
-            <from-outcome>loginPage</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-    
-    <converter>
-        <converter-for-class>java.lang.Enum</converter-for-class>
-        <converter-class>javax.faces.convert.EnumConverter</converter-class>
-    </converter>
 
-   <!--  <lifecycle>
-        <phase-listener>com.shenbian.admin.util.pf.LogPhaseListener</phase-listener>
-        <phase-listener>com.shenbian.admin.util.pf.LoginPhaseListener</phase-listener>
-    </lifecycle> -->
+    
+
 
 
 </faces-config>

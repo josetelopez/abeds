@@ -10,22 +10,25 @@ import javax.ws.rs.core.Response.Status;
 import org.glassfish.jersey.client.ClientConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import com.peretecorporate.abedsbackend.exception.AbedsBackendException;
 import com.peretecorporate.abedsbackend.model.Usuario;
 
 import es.peretecorporate.abeds.exception.ServiceRestClientExecption;
 
+@Component
 @Controller
 public class LoginRestClient extends AbstractRestClient {
 
 	private static final Logger	LOGGER	= LoggerFactory.getLogger(LoginRestClient.class.getName());
-
+	
 	private ClientConfig		usuarioClientConfig;
 
 	public LoginRestClient() {
 		iniciarClienteConfig();
+
 	}
 
 	public LoginRestClient(String url, String contextPath) {
@@ -46,9 +49,10 @@ public class LoginRestClient extends AbstractRestClient {
 	 * Metodo que extrae todos los usuarios.
 	 * @return
 	 * @throws ServiceRestClientExecption
+	 * @throws AbedsBackendException 
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Usuario> findAllUsuarios() throws ServiceRestClientExecption {
+	public List<Usuario> findAllUsuarios() throws ServiceRestClientExecption, AbedsBackendException {
 
 		LOGGER.info("GET todos los usuarios");
 
@@ -66,8 +70,17 @@ public class LoginRestClient extends AbstractRestClient {
 		else {
 			throw new ServiceRestClientExecption(response.readEntity(String.class), status);
 		}
+	
 		return result;
 
+	}
+
+	public ClientConfig getUsuarioClientConfig() {
+		return usuarioClientConfig;
+	}
+
+	public void setUsuarioClientConfig(ClientConfig usuarioClientConfig) {
+		this.usuarioClientConfig = usuarioClientConfig;
 	}
 
 }

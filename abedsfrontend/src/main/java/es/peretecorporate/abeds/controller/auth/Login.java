@@ -5,21 +5,29 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.peretecorporate.abedsbackend.exception.AbedsBackendException;
 import com.peretecorporate.abedsbackend.model.Usuario;
 
 import es.peretecorporate.abeds.client.LoginRestClient;
 import es.peretecorporate.abeds.exception.ServiceRestClientExecption;
 
 @Controller(value = "login")
-@SessionScoped
+@Component
+@ManagedBean
+@ViewScoped
 public class Login implements Serializable {
 
 	/**
@@ -39,7 +47,7 @@ public class Login implements Serializable {
 
 	/**TODO añadir el valor por configuracion properties */
 	private static final String	URL_USUARIO				= "http://localhost:8081";
-	
+
 	/**TODO añadir el valor por configuracion properties */
 	private static final String	CONTEXT_PATH_USUARIO	= "";
 
@@ -48,12 +56,16 @@ public class Login implements Serializable {
 
 	@PostConstruct
 	public void init() {
-
 		this.user = "";
 		this.pwd = "";
-
 		loginRestClient = new LoginRestClient(URL_USUARIO, CONTEXT_PATH_USUARIO);
+		validateUsernamePassword();
+	}
 
+	@GetMapping("/login")
+	public String login(@RequestParam(name = "name", required = false) String name, Model model) {
+		model.addAttribute("name", name);
+		return "login";
 	}
 
 	/**
@@ -64,7 +76,13 @@ public class Login implements Serializable {
 		try {
 
 			List<Usuario> usuario;
-			usuario = loginRestClient.findAllUsuarios();
+			try {
+				usuario = loginRestClient.findAllUsuarios();
+			}
+			catch (AbedsBackendException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 		catch (ServiceRestClientExecption e) {
@@ -92,7 +110,7 @@ public class Login implements Serializable {
 		try {
 			init();
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", "");
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/login.xhtml");
 
 		}
 		catch (IOException e) {
