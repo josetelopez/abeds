@@ -57,6 +57,20 @@ public class Usuario {
 	private String		email;
 
 	/**
+	 * Constructores
+	 */
+
+	public Usuario() {
+
+	}
+
+	public Usuario(String nombreUsuario, String email, String contrasenna) {
+		this.nombreUsuario = nombreUsuario;
+		this.email = email;
+		this.contrasenna = contrasenna;
+	}
+
+	/**
 	 * Getter y setter
 	 * 
 	 */

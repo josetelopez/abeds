@@ -16,9 +16,14 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * Clase para utilizar el framework de swagger
+ * @author jlopez5
+ *
+ */
 @Configuration
 @EnableSwagger2
-@Profile({ "dev" })
+@Profile({"dev"})
 public class SwaggerConfiguration {
 
 	@Value("${info.app.version}")
@@ -27,9 +32,9 @@ public class SwaggerConfiguration {
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.peretecorporate.abedsbackend.controller"))
-				.paths(PathSelectors.any()).build().apiInfo(metaData())
-				.securitySchemes(Arrays.asList(new ApiKey[] { apiKey() }));
+					.apis(RequestHandlerSelectors.basePackage("com.peretecorporate.abedsbackend.controller"))
+					.paths(PathSelectors.any()).build().apiInfo(metaData())
+					.securitySchemes(Arrays.asList(new ApiKey[]{apiKey()}));
 	}
 
 	private ApiKey apiKey() {
@@ -38,9 +43,9 @@ public class SwaggerConfiguration {
 
 	private ApiInfo metaData() {
 		return (new ApiInfoBuilder()).title("Spring Boot REST API (abeds_backend)")
-				.description("\"REST API del Modulo abeds_backend\"").version(this.version)
-				.license("Apache License Version 2.0").licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
-				.build();
+					.description("\"REST API del Modulo abeds_backend\"").version(this.version)
+					.license("Apache License Version 2.0").licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
+					.build();
 	}
 
 }

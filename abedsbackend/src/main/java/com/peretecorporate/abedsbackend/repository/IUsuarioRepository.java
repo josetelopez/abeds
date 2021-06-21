@@ -1,6 +1,7 @@
 package com.peretecorporate.abedsbackend.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,12 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 	List<Usuario> findAll();
 
 	Usuario findUsuarioByidUsuario(Integer id);
+
+	Optional<Usuario> findBynombreUsuario(String nombreUsuario);
+	
+	Boolean existsBynombreUsuario(String nombreUsuario);
+
+	Boolean existsByemail(String email);
 	
 	@Query("Select usu from Usuario usu where usu.nombre like %:nombre% and usu.apellido1 like %:apellido1% and usu.apellido2 like %:apellido2%")
 	Usuario findUsuarioByNombre(String nombre, String apellido1, String apellido2);

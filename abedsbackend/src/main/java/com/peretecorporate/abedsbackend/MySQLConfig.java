@@ -17,10 +17,15 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Clase para la configuracion de mysql, recoger los datos de conf. del properties
+ * @author jlopez5
+ *
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "abedsEntityManagerFactory", transactionManagerRef = "abedsTransactionManager", basePackages = {
-		"com.peretecorporate.abedsbackend.repository" })
+		"com.peretecorporate.abedsbackend.repository"})
 public class MySQLConfig {
 
 	@Autowired
