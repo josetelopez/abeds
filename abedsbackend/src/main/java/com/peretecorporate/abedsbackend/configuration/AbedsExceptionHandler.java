@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 
 import com.peretecorporate.abedsbackend.enumerados.ETipoError;
 import com.peretecorporate.abedsbackend.error.ErrorDto;
@@ -101,6 +102,10 @@ public class AbedsExceptionHandler extends ResponseEntityExceptionHandler {
 		else if (exp.getCause() != null && exp.getCause().getCause() != null
 					&& exp.getCause().getCause().getMessage() != null) {
 			errorDetails.setMessage("Error debido a configuración de los analisis técnicos en el departamento.");
+			myhttpStatus = HttpStatus.FORBIDDEN;
+		}
+		else if (exp instanceof BadCredentialsException) {
+			errorDetails = handleBeanRollbackException(new RollbackException(exp));
 			myhttpStatus = HttpStatus.FORBIDDEN;
 		}
 		else {

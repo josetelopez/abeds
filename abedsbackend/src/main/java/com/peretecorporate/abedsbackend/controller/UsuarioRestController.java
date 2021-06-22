@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,9 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.peretecorporate.abedsbackend.exception.AbedsBackendException;
 import com.peretecorporate.abedsbackend.model.Usuario;
 import com.peretecorporate.abedsbackend.playload.request.LoginRequest;
-import com.peretecorporate.abedsbackend.playload.request.SignupRequest;
 import com.peretecorporate.abedsbackend.playload.response.JwtResponse;
-import com.peretecorporate.abedsbackend.playload.response.MessageResponse;
 import com.peretecorporate.abedsbackend.security.jwt.JwtUtils;
 import com.peretecorporate.abedsbackend.service.UserDetailsImpl;
 import com.peretecorporate.abedsbackend.service.UsuarioService;
@@ -59,11 +56,21 @@ public class UsuarioRestController {
 
 	@Autowired
 	private JwtUtils				jwtUtils;
-	
 
+	/**
+	 * Metodo para el login del usuario en la aplicacion
+	 * @param loginRequest
+	 * @return
+	 */
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	@ApiOperation(value = "Login", notes = "Login de la aplicacion")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+		/** Authenticaion del usuario */
 		Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -351,6 +358,11 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Borrado de usuario por id", notes = "Se borra un usuario introduciendo por parametro su id")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public void delete(@PathVariable("id") Integer id) throws AbedsBackendException {
 		log.info("Traza del metodo rest UsuarioRestController.delete(" + id + ")");
 		usuarioService.deleteById(id);
@@ -358,6 +370,11 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/deleteByNif/{nif}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Borrado de usuario por su nif", notes = "Se borra un usuario introduciendo por parametro su nif")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public void delete(@PathVariable("nif") String nif) throws AbedsBackendException {
 		log.info("Inicio del metodo rest UsuarioRestController.delete(" + nif + ")");
 		usuarioService.deleteByNif(nif);
@@ -365,6 +382,11 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Borrado de usuario", notes = "Se borra un objeto usuario")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public void delete(Usuario usuario) throws AbedsBackendException {
 		log.info("Inicio del metodo rest UsuarioRestController.delete(" + usuario + ")");
 		usuarioService.delete(usuario);
@@ -372,6 +394,11 @@ public class UsuarioRestController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@ApiOperation(value = "Insert de usuario", notes = "Se inserta un usuario")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
 	public void save(Usuario usuario) throws AbedsBackendException {
 		log.info("Inicio del metodo rest UsuarioRestController.save(" + usuario + ")");
 		usuarioService.save(usuario);

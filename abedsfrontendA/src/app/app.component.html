@@ -1,30 +1,46 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">bezKoder</a>
+  
+   <!--Barra de navegacion aparece cuando esta logado -->
+  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isLoggedIn">
+    <!--Nombre de la aplicacion -->
+    <a href="#" class="navbar-brand">ABEDS</a>
+
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      
+      <!-- Home -->
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Home </a>
       </li>
+    
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
+    
       <li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
       </li>
+     
       <li class="nav-item">
         <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
       </li>
+    
     </ul>
 
+    <!-- En la parte derecha de la barra si no esta logado -->
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+       <!-- Registrar el usuario -->
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a href="/register" class="nav-link" routerLink="register">Regristrarse</a>
       </li>
+
+      <!-- Login del usuario -->
       <li class="nav-item">
         <a href="/login" class="nav-link" routerLink="login">Login</a>
       </li>
+
     </ul>
 
+  <!-- En la parte derecha de la barra si esta logado -->
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
         <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
@@ -35,7 +51,19 @@
     </ul>
   </nav>
 
+  <!-- Mensaje para cuando se ha logado satisfactoriamente -->
+  <div class="alert alert-success" *ngIf="isLoggedIn">
+    Logado como {{ roles }}.
+  </div>
+
+   <!-- Componente Login -->
+  <div class="container align-middle">
+    <app-login></app-login>
+  </div>
+
+   <!-- Componente para los enrutados -->
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+
 </div>
