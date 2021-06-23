@@ -1,9 +1,13 @@
 
-  <div class="card card-container mx-auto p-4" style="width: 350px;">
+  <div class="card card-container mx-auto p-4" style="width: 500px;">
       <!--Titulo corto de la applicacion-->
-
+      <div class="mx-auto">
+        <p>ABEDS</p>
+      </div>
       <!--Titulo largo de la aplicacion-->
-
+      <div>
+        <p>Aplicación de Baloncesto de Escuelas deportivas Sevilla</p>
+      </div>
       <!-- Formulario del login -->
       <form *ngIf="!isLoggedIn" name="form"
       (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
@@ -54,6 +58,10 @@
           Login failed: {{ errorMessage }}
         </div>
       </div>
+
+      <!--TODO olvido su contraseña -->
+
+
     </form>
       
   </div>
