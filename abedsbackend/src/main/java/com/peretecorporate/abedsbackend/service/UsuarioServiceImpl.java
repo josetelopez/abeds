@@ -337,4 +337,24 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void setUsuarioRepository(IUsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
 	}
+
+	
+	@Override
+	public Optional<Usuario> findUsuarioByNombre(String nombreUsuario) throws AbedsBackendException {
+
+		try {
+			if (this.usuarioRepository.findBynombreUsuario(nombreUsuario) != null) {
+				Optional<Usuario> usuario = this.usuarioRepository.findBynombreUsuario(nombreUsuario);
+				return usuario;
+			}
+
+			log.error("Error en el metodo findUsuarioByNombre de UsuarioService. No se encuentra el usuario "
+						+ nombreUsuario);
+			throw new AbedsBackendException(this.noExisteUsuarioNombre + nombreUsuario);
+		}
+		catch (Exception e) {
+			log.error("Error en el metodo findUsuarioByNombre de UsuarioService " + e);
+			throw new AbedsBackendException(this.errorComunicaciones);
+		}
+	}
 }

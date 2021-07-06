@@ -1,6 +1,7 @@
 package com.peretecorporate.abedsbackend.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -214,6 +215,35 @@ public class UsuarioRestController {
 		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
 	}
 
+	
+	
+	@RequestMapping(value = "/findUserByNombreUsuario/{nombreUsuario}", method = RequestMethod.GET)
+	@ApiOperation(value = "Obtener usuario por nombre de usuario", notes = "Este metodo obtiene un usuario por su nombre usuario")
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "No esta autorizado para realizar esta operacion"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No se ha encontrado")})
+	public ResponseEntity<Usuario> findByNombreUsuario(
+				@ApiParam(value = "Nombre usuario que vamos a buscar", required = true) @PathVariable("nombreUsuario") String nombreUsuario)
+				throws AbedsBackendException {
+
+		log.info("REST Solicitud GET de /usuario/findUserByNombUsuario/{nombreUsuario}/ para obtener usuario" + 
+					 nombreUsuario  + HttpStatus.NO_CONTENT);
+
+		Optional<Usuario> usuario = usuarioService.findUsuarioByNombre(nombreUsuario);
+	
+		if (usuario != null) {
+			log.info("REST Respuesta GET de /usuario/findByNombreUsuario/{nombreUsuario} para obtener usuario por nombre de usuario"
+						+ nombreUsuario + HttpStatus.NO_CONTENT);
+			return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
+		}
+
+		log.info("REST Respuesta GET de /usuario/findByNombreUsuario/{nombreUsuario}para obtener usuario por nombre de usuario"
+					+ nombreUsuario);
+
+		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+	}
+	
 	@RequestMapping(value = "/findUsuarioBynif/{nif}", method = RequestMethod.GET)
 	@ApiOperation(value = "Obtener usuario por dni", notes = "Este metodo obtiene un usuario por su dni")
 	@ApiResponses({@ApiResponse(code = 200, message = "OK"),

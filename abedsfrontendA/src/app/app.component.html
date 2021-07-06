@@ -2,16 +2,25 @@
   
    <!--Barra de navegacion aparece cuando esta logado -->
   <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isLoggedIn">
+
+    <!-- Icono de la diputación de sevilla -->
+    <a href="https://www.dipusevilla.es/temas/deportes/" target="_blank"><img id="profile-img"  class="profile-img-card-logo-diputacion"  src="./assets/images/logoDiputacion01.png" /></a>
+    
     <!--Nombre de la aplicacion -->
-    <a href="#" class="navbar-brand">ABEDS</a>
+    <a href="#" style="margin-left: 10px;" class="navbar-brand">ABEDS</a>
 
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       
       <!-- Home -->
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a href="/home" class="nav-link" *ngIf="isLoggedIn" routerLink="home">Home </a>
       </li>
     
+      <!--Usuario-->
+      <li class="nav-item">
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
+      </li>
+
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
@@ -20,9 +29,7 @@
         <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
       </li>
      
-      <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
-      </li>
+      
     
     </ul>
 
@@ -46,18 +53,19 @@
         <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
-      </li>
+        <a href class="nav-link" (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon> LogOut </a>
+      </li>  
     </ul>
   </nav>
 
   <!-- Mensaje para cuando se ha logado satisfactoriamente -->
-  <div class="alert alert-success" *ngIf="isLoggedIn">
-    Logado como {{ roles }}.
+  <div class="alert alert-success alert-dismissible fade show" *ngIf="isLoggedIn">
+    Logado como <strong>{{ roles }}</strong>.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
    <!-- Componente Login -->
-  <div class="container align-middle">
+  <div class="container ">
     <app-login></app-login>
   </div>
 
@@ -65,5 +73,22 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+
+  <!-- Footer de la pagina -->
+  <footer class="footer"> 
+    <div class="row">
+      <div class="col-sm">
+        <div class="text-muted" style="margin-left:8px;">
+          <p style="font-size:medium;" ><strong>Diputación de Sevilla</strong> <span style="font-style:Italic;font-size:small;"> - Av. de Menéndez y Pelayo, 32, 41071 Sevilla Tlf. 954 55 00 00</span></p>
+        </div>
+      </div>
+      <div class="col-sm"> 
+        <a href="https://www.juntadeandalucia.es/organismos/educacionydeporte/consejeria/titular.html" target="_blank"><img id="profile-jjaa"  class="profile-img-card-logo-jjaa"  src="./assets/images/logo-jjaa-01.png" /></a>
+      </div>
+      <div class="col-sm">
+        <a href="https://www.juntadeandalucia.es/organismos/educacionydeporte/consejeria/titular.html" target="_blank"><img id="profile-jjaa"  class="profile-img-card-logo-jjaa"  src="./assets/images/logo-jjaa-01.png" /></a>
+      </div>
+    </div>
+  </footer>
 
 </div>
