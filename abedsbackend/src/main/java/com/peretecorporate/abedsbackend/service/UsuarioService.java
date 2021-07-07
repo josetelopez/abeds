@@ -1,6 +1,7 @@
 package com.peretecorporate.abedsbackend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,8 @@ public interface UsuarioService {
 	Usuario findUsuarioByidUsuario(Integer id) throws AbedsBackendException;
 
 	Usuario findUsuarioByNombre(String nombre, String apellido1, String apellido2) throws AbedsBackendException;
+	
+	Optional<Usuario> findUsuarioByNombre(String nombreUsuario) throws AbedsBackendException;
 
 	Usuario findUsuarioBynif(String nif) throws AbedsBackendException;
 

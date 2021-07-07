@@ -24,6 +24,8 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 	
 	@Query("Select usu from Usuario usu where usu.nombre like %:nombre% and usu.apellido1 like %:apellido1% and usu.apellido2 like %:apellido2%")
 	Usuario findUsuarioByNombre(String nombre, String apellido1, String apellido2);
+	
+	Usuario findUsuarioByNombre(String nombre);
 
 	@Query("Select usu from Usuario usu where usu.nif = :nif ")
 	Usuario findUsuarioBynif(String nif);

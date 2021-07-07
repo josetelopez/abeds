@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
 
-const API_URL = 'http://localhost:8080/usuario/';
+const API_URL = 'http://localhost:8081/usuario/';
 
 
 @Injectable({
@@ -13,7 +14,11 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', { responseType: 'text' });
+    return this.http.get(API_URL + 'allUsuario', { responseType: 'text' });
+  }
+
+  getUsuarioByNombreUsuario(nombreUsuario:string) :  Observable<any>{
+    return this.http.get(API_URL + 'findUserByNombreUsuario/' + nombreUsuario, { responseType: 'json' });
   }
 
   getUserBoard(): Observable<any> {
@@ -27,4 +32,6 @@ export class UsuarioService {
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
+
+ 
 }
