@@ -7,18 +7,21 @@
     <a href="https://www.dipusevilla.es/temas/deportes/" target="_blank"><img id="profile-img"  class="profile-img-card-logo-diputacion"  src="./assets/images/logoDiputacion01.png" /></a>
     
     <!--Nombre de la aplicacion -->
-    <a href="#" style="margin-left: 10px;" class="navbar-brand">ABEDS</a>
+    <div class="row">
+      <a class="navbar-brand" style="padding-left: 20px;margin-top:10px;">Aplicación de Baloncesto de Escuelas Deportivas de Sevilla</a>
+      <a href="/home" style="padding-left: 20px;" class="navbar-brand">ABEDS</a>
+    </div>
 
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       
       <!-- Home -->
       <li class="nav-item">
-        <a href="/home" class="nav-link" *ngIf="isLoggedIn" routerLink="home">Home </a>
+        <a href="/home" class="nav-link" style="margin-top:35px;" *ngIf="isLoggedIn" routerLink="home">Home </a>
       </li>
     
       <!--Usuario-->
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
+        <a href="/user" class="nav-link" style="margin-top:35px;" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
       </li>
 
       <li class="nav-item" *ngIf="showAdminBoard">
@@ -85,9 +88,7 @@
       <div class="col-sm"> 
         <a href="https://www.juntadeandalucia.es/organismos/educacionydeporte/consejeria/titular.html" target="_blank"><img id="profile-jjaa"  class="profile-img-card-logo-jjaa"  src="./assets/images/logo-jjaa-01.png" /></a>
       </div>
-      <div class="col-sm">
-        <a href="https://www.juntadeandalucia.es/organismos/educacionydeporte/consejeria/titular.html" target="_blank"><img id="profile-jjaa"  class="profile-img-card-logo-jjaa"  src="./assets/images/logo-jjaa-01.png" /></a>
-      </div>
+     
     </div>
   </footer>
 
