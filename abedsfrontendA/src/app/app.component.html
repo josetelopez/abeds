@@ -16,12 +16,12 @@
       
       <!-- Home -->
       <li class="nav-item">
-        <a href="/home" class="nav-link" style="margin-top:35px;" *ngIf="isLoggedIn" routerLink="home">Home </a>
+        <a href="/home" class="nav-link" style="margin-top:35px;font-size:30px;" *ngIf="isLoggedIn" routerLink="home">Home </a>
       </li>
     
       <!--Usuario-->
       <li class="nav-item">
-        <a href="/user" class="nav-link" style="margin-top:35px;" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
+        <a href="/user" class="nav-link" style="margin-top:35px;font-size:30px;" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
       </li>
 
       <li class="nav-item" *ngIf="showAdminBoard">
@@ -53,10 +53,11 @@
   <!-- En la parte derecha de la barra si esta logado -->
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        <a href="/profile" class="nav-link" routerLink="profile" style="font-size:25px;">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon> LogOut </a>
+        <a href class="nav-link" (click)="logout()" style="font-size:20px;" ><fa-icon [icon]="faSignOutAlt" style="font-size:25px;" >
+        </fa-icon> LogOut </a>
       </li>  
     </ul>
   </nav>

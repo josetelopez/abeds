@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../models/usuario';
+import { UsuarioService } from '../_service/usuario.service';
 
 @Component({
   selector: 'app-board-moderator',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardModeratorComponent implements OnInit {
 
-  constructor() { }
+  usuarios:Usuario[];
+
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+    //Controlar el rol:
+
+    this.usuarioService.getPublicContent().subscribe(
+      data => {
+        this.usuarios = data;
+      },
+      err => {
+        this.usuarios = JSON.parse(err.error).message;
+      }
+    );
   }
 
 }
+

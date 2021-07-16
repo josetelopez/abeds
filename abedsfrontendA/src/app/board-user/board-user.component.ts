@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
+import { UsuarioService } from '../_service/usuario.service';
 
 @Component({
   selector: 'app-board-user',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardUserComponent implements OnInit {
 
-  constructor() { }
+  listaUsuarios:Observable<Usuario>;
+
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
-  }
+    //Controlar el rol:
+
+    this.usuarioService.getPublicContent().subscribe(
+      data => {
+        this.listaUsuarios = data;
+      },
+      err => { 
+        this.listaUsuarios = JSON.parse(err.error).message;
+      }
+    );
+    }
 
 }
