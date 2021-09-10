@@ -1,15 +1,218 @@
 
 <!-- rol Administrador -->
+
+
 <div class="container">
-    <table>
-        <tr *ngFor="let usuario of listaUsuarios">
-          <td>
-            <p> {{usuario.nombreUsuario}}</p>
+  <table class="table table-striped table-dark table-bordered" style="margin-top: 20px;">
+    <!--Cabecera de la tabla -->
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Dni</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Nombre Usuario</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Email</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let usuario of listaUsuarios">
+      <td><p> {{usuario.nif}}</p></td>
+      <td>{{usuario.nombre}} {{usuario.apellido1}} {{usuario.apellido2}}</td>
+      <td>{{usuario.nombreUsuario}}</td>
+      <td>{{usuario.telefono1}}</td>
+      <td>{{usuario.email}}</td>
+      <td>{{usuario.idTipoUsuario.tipoUsuario}}</td>
+     
+      <td>
+        <!-- Boton de ver -->
+        <span class="table-remove"><button type="button" class="btn btn-info btn-rounded btn-sm my-0">
+          Ver
+        </button>
+      </span>
+       <!-- Boton de editar -->
+      <span class="table-edit"><button type="button" class="btn btn-info btn-rounded btn-sm my-0">
+        Editar
+      </button>
+        </span>
+         <!-- Boton de borrar -->
+         <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
+          Borrar
+        </button>
+      </span>
+      </td>
+    </tr>
+    </table>
+
+
+    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#altaUsuario">
+     + Añadir
+    </button>
+
+     <!-- Modal -->
+<div class="modal fade" id="altaUsuario" tabindex="-1" aria-labelledby="altaUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog- modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="altaUsuarioLabel">Alta de Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!--<form role="form" method="POST" action="">-->
+        <!--<input type="hidden" name="_token" value="">-->
+        <form class="needs-validation">
+        <div class="container-fluid">
+
+          <div class="form-group row">
+             <!-- nombre usuario (50 caracteres)-->
+            <div class="col">
+              <label for="validToolNmbUsu" class="control-label">Nombre usuario (Alias)</label>
+              <input id="validToolNmbUsu" type="text" class="form-control input-lg col-md-8" name="nombreUsuario" required>
+              <div class="valid-tooltip">
+                Ok!
+              </div>
+              <div class="invalid-tooltip">
+                Rellena este campo
+              </div>
+            </div>
+            <div class="col">
+              <!-- contrasenna -->
+              <label class="control-label">Contraseña</label>
+              <input type="password" class="form-control input-lg col-md-8" name="contrasenna">
+            </div> 
+          </div>
+
+          <div class="form-group row">
+            <div class="col">
+               <!-- nombre-->
+              <label class="control-label">Nombre</label>
+              <div>
+                  <input class="form-control input-lg" name="nombre" value="">
+              </div>
+            </div>
+            <div class="col">
+               <!-- apellido1 -->
+              <label class="control-label">Primer Apellido</label>
+              <div>
+                  <input class="form-control input-lg" name="apellido1">
+              </div>
+            </div>
+            <div class="col">
+               <!-- apellido2 -->
+              <label class="control-label">Segundo Apellido</label>
+            <div>
+                <input class="form-control input-lg" name="apellido2">
+            </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col">
+              <!-- email -->
+              <label class="control-label">Email</label>
+              <div>
+                  <input type="email" class="form-control input-lg" name="email">
+              </div>
+            </div>
+            <div class="col-md-8">
+              <!-- nif -->
+              <label class="control-label">Nif</label>
+              <div>
+                  <input class="form-control input-lg col-md-4" name="nif">
+              </div>
+            </div>
+          </div>
+            
+          <div class="form-group row">
+            <div class="col">
+               <!-- telefono1 -->
+              <label class="control-label">Teléfono</label>
+              <div>
+                <input type="tel" class="form-control input-lg" name="telefono1">
+              </div>
+            </div>
+            <div class="col-md-8">
+              <!-- telefono2 -->
+              <label class="control-label">Otro Teléfono</label>
+              <div>
+                <input type="tel" class="form-control input-lg col-md-4" name="telefono2">
+              </div>
+            </div>
+          </div>
+     
+          <div class="form-group row">
+            <div class="col col-md-4">
+               <!-- tipo usuario -->
+              <label for="inputState" class="form-label">Tipo Usuario</label>
+              <select id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option *ngFor="let tipoUsuario of listaTipoUsuarios">{{tipoUsuario.descripcion}}</option>
+              </select>
+            </div>
+          </div> 
+          
+          <div class="form-group row">
+            <div class="col">
+               <!-- direccion -->
+              <label class="control-label">Dirección</label>
+              <div>
+                  <input type="text" class="form-control input-lg" name="direccion">
+              </div>
+            </div>
+            <div class="col col-md-2">
+               <!-- numero -->
+              <label class="control-label">Número</label>
+              <div>
+                  <input class="form-control input-lg" name="numero">
+              </div>
+            </div>
+            <div class="col col-md-2">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col col-md-5">
+              <!-- municipio -->
+              <label class="control-label">Municipio</label>
+              <div>
+                <input class="form-control input-lg" name="municipio">
+              </div>
+            </div>
+            <div class="col">
+              <!-- cod postal -->
+              <label class="control-label">Cod Postal</label>
+              <div>
+                <input class="form-control input-lg" name="codPostal">
+              </div>
+            </div>
+            <div class="col">
+              <!-- provincia -->
+              <label class="control-label">Provincia</label>
+              <div>
+                  <input class="form-control input-lg" name="provincia">
+              </div>
+            </div>
+
+          </div>
            
-        </td>
-          </tr>
-      </table>
+        </div>   
+              
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" type="submit">Save Usuario</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+</div>
+
+
+
+
 
 
 <!-- rol Arbitro  -->

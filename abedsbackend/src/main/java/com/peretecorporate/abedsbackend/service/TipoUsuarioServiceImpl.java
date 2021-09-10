@@ -54,4 +54,9 @@ public class TipoUsuarioServiceImpl implements TipoUsuarioService {
 	public void save(TipoUsuario tipoUsuario) {
 		tipoUsuarioRepository.save(tipoUsuario);
 	}
+
+	@Override
+	public List<TipoUsuario> findTipoUsuarioAlta() {
+		return tipoUsuarioRepository.findTipoUsuarioAlta();
+	}
 }

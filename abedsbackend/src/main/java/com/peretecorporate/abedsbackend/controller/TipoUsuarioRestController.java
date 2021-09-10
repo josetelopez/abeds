@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.peretecorporate.abedsbackend.model.TipoUsuario;
 import com.peretecorporate.abedsbackend.service.TipoUsuarioService;
 
+import io.swagger.annotations.Api;
+
 /**
  * Controlador res para los tipos de usuario de la aplicacion abedsbackend
  * @author jlopez5
  *
  */
-
+@CrossOrigin(origins = "*", maxAge = 3600)
+@Api(value = "/tipoUsuario", tags = {"Operaciones con tipos de usuarios"})
 @RestController
-@RequestMapping("/v1/tipoUsuario")
+@RequestMapping("/tipoUsuario")
 public class TipoUsuarioRestController {
 
 	private static final Logger	log	= LoggerFactory.getLogger(TipoUsuarioRestController.class);
@@ -29,6 +33,23 @@ public class TipoUsuarioRestController {
 	@Autowired
 	TipoUsuarioService			tipoUsuarioService;
 
+	/**
+	 * Metodo rest que devuelve todos los tipos de usuarios de la tabla menos el tipo administrador.
+	 * REQ-USUARIO-ALTA-04
+	 * @return List<TipoUsuario>
+	 */
+	@RequestMapping(value = "/findTipoUsuarioAlta", method = RequestMethod.GET)
+	public List<TipoUsuario> findTipoUsuarioAlta() {
+
+		log.info("Inicio del metodo rest TipoUsuarioRestController>>findTipoUsuarioAlta....");
+
+		List<TipoUsuario> tipoUsuarioList = tipoUsuarioService.findTipoUsuarioAlta();
+
+		log.info("Finaliza del metodo rest TipoUsuarioRestController>>findTipoUsuarioAlta...");
+
+		return tipoUsuarioList;
+	}
+	
 	/**
 	 * Metodo rest que devuelve todos los tipos de usuarios de la tabla.
 	 * @return List<TipoUsuario>
@@ -44,6 +65,7 @@ public class TipoUsuarioRestController {
 
 		return tipoUsuarioList;
 	}
+	
 
 	/**
 	 * Metodo rest que devuelve un objeto tipoUsuario, introduciendo por parametro el id.

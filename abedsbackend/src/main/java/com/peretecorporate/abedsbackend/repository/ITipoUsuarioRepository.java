@@ -52,5 +52,13 @@ public interface ITipoUsuarioRepository extends JpaRepository<TipoUsuario, Integ
 	 */
 	@Query("Select tpusu.codTipoUsuario from TipoUsuario tpusu")
 	List<String> getAllBycodTipoUsuario();
+	
+	/**
+	 * Esta consulta es para mostrar todos los tipos de usuarios menos el tipo administrador
+	 * REQ-USUARIO-ALTA-04
+	 * @return
+	 */
+	@Query("Select tusu from TipoUsuario tusu where tusu.idTipoUsuario != (Select tusu.idTipoUsuario from TipoUsuario tusu where codTipoUsuario = 'ADMIN')")
+	List<TipoUsuario> findTipoUsuarioAlta();
 
 }

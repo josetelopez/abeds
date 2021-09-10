@@ -22,4 +22,9 @@ describe('BoardUserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+
 });

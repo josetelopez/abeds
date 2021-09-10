@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.peretecorporate.abedsbackend.model.Estado;
 import com.peretecorporate.abedsbackend.model.TipoUsuario;
 
 @Service
 public interface TipoUsuarioService {
 
 	List<TipoUsuario> findAll();
+	
+	List<TipoUsuario> findTipoUsuarioAlta();
 
 	TipoUsuario findByidTipoUsuario(Integer id);
 
